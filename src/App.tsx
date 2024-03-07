@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Header from './components/Header';
-import { ProductList } from './components/ProductList';
+import ProductList from './components/ProductList';
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -45,13 +45,13 @@ function App() {
   console.log('data', data);
 
   return (
-    <div style={{ padding: "30px 40px", width: "100%", display: 'flex', flexDirection: 'column' }}>
-      <video src="background-sam.mp4" loop muted playsInline autoPlay className="video-container"></video>
+    <>
       <Header></Header>
       <div className="main-container">
+        <video src="background-sam.mp4" loop muted playsInline autoPlay className="video-container"></video>
         <ProductList></ProductList>
       </div>
-    </div>
+    </>
   );
 }
 

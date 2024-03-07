@@ -1,11 +1,21 @@
 import styled from "styled-components";
 
-export const LogoContainer = styled.div`
+export const Header = styled.header`
     display: flex;
+    align-items: center;
     z-index: 3;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    padding: 30px 40px;
+    position: absolute;
+
+    img {
+        margin-top: 40px;
+        margin-left: 30px;
+    }
+`;
+
+export const SubTotal = styled.div`
+    margin-left: auto;
+    color: white;
+    margin-top: 40px;
+    margin-right: 30px;
 `;
