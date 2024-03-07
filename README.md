@@ -28,6 +28,10 @@ Even thought the app is already connected to a graphql endpoint, the trainee can
 - https://www.vendure.io/docs/graphql-api/shop/
 
 ## Scripts
+The node version used by this project is v16.20.2 
+
+### `yarn`
+Install application dependecies
 
 ### `yarn start`
 
