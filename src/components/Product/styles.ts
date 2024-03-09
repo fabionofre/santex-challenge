@@ -8,15 +8,20 @@ export const Card = styled.div`
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1), 0 -1px 2px 0 rgba(0,0,0,.1);
     background: rgba(255, 255, 255, 0.8);
     color: #333;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `;
 
 export const CardHeader = styled.div`
     padding 10px 10px 30px 10px;
     img {
         width: 100%;
-        object-fit: contain;
+        object-fit: cover;
         object-position: center;
         border-radius: 6px;
+        height: 270px;
     }
 `;
 
@@ -25,7 +30,7 @@ export const CardBody = styled.div`
     padding 20px 10px 30px 10px;
 `;
 
-export const ProducDescription = styled.p`
+export const ProductDescription = styled.p`
     width: 100%;
     color: #333;
     font-size: 14px;
@@ -72,4 +77,11 @@ export const BuyButton = styled.div`
         -webkit-mask-composite: exclude;
         mask-composite: exclude;
     }
+`;
+
+export const Price = styled.span`
+    margin: auto auto 0 auto;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.25;
 `;
