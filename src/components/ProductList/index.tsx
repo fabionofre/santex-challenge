@@ -52,7 +52,15 @@ export default function ProductList() {
       </S.ListContainer>
       <S.Pagination>
         {Array.from({ length: totalPages }, (_, index) => index + 1).map((p) => {
-          return (<S.PaginationItem active={page === p} onClick={() => setPage(p)}>{p}</S.PaginationItem>);
+          return (
+            <S.PaginationItem key={p}
+              data-testid={`pagination-item-${p}`}
+              active={page === p}
+              data-active={page === p}
+              onClick={() => setPage(p)}
+            >
+              {p}
+            </S.PaginationItem>);
         })}
 
       </S.Pagination>
