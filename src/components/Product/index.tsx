@@ -11,7 +11,7 @@ export interface ProductProps {
 }
 
 export function Product(props: ProductProps) {
-    const [addItemToOrder, { loading, error }] = useMutation(ADD_ITEM_TO_ORDER);
+    const [addItemToOrder, { loading }] = useMutation(ADD_ITEM_TO_ORDER);
     const orderContext = useContext(OrderContext);
 
     const handleBuyButtonClick = async () => {
@@ -30,7 +30,7 @@ export function Product(props: ProductProps) {
     return (
         <S.Card>
             <S.CardHeader>
-                <img src={props.product.picture} />
+                <img alt="product-picutre" src={props.product.picture} />
             </S.CardHeader>
             <S.CardBody>
                 <S.ProductDescription>

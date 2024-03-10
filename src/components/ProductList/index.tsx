@@ -14,12 +14,14 @@ export interface ProductType {
 
 export default function ProductList() {
   const [products, setProducts] = useState<ProductType[]>([]);
-  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
+
+  const itemsPerPage = 8;
 
   const { loading, data } = useQuery(GET_PRODUCTS, {
     variables: {
-      options: { take: 8, skip: page > 1 ? (page * 8) : 0 }
+      options: { take: itemsPerPage, skip: page > 1 ? (page * itemsPerPage - itemsPerPage) : 0 }
     }
   });
 
@@ -37,15 +39,23 @@ export default function ProductList() {
       }));
 
       setProducts(mappedProducts);
-      setTotalProducts(data.products.totalItems);
+      setTotalPages(Math.ceil(data.products.totalItems / itemsPerPage));
     }
   }, [data]);
 
   if (loading) return <h1>Loading...</h1>;
 
   return (
-    <S.ListContainer role="products-list">
-      {products.map((product: ProductType) => <Product product={product} key={product.id} />)}
-    </S.ListContainer>
+    <>
+      <S.ListContainer role="products-list">
+        {products.map((product: ProductType) => <Product product={product} key={product.id} />)}
+      </S.ListContainer>
+      <S.Pagination>
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map((p) => {
+          return (<S.PaginationItem active={page === p} onClick={() => setPage(p)}>{p}</S.PaginationItem>);
+        })}
+
+      </S.Pagination>
+    </>
   );
 }
