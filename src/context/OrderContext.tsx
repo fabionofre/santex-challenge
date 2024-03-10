@@ -1,11 +1,11 @@
-import { ReactChild, createContext, useContext, useEffect, useState } from "react";
+import { ReactChild, createContext, useEffect, useState } from "react";
 import useStateWithStorage from "../hooks/useStateWithStorage";
 
-interface OrderType {
+export interface OrderType {
     subTotal: number;
 }
 
-export interface OrderContextType {
+interface OrderContextType {
     order: OrderType | undefined;
     setOrder: React.Dispatch<React.SetStateAction<OrderType | undefined>>;
 }

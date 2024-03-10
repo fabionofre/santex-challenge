@@ -8,7 +8,8 @@ export const GET_PRODUCTS = gql`
     products(options: $options)  {
       items{
         ...ProductInfo
-      }
+      },
+      totalItems
     }
   }
   ${PRODUCT_FRAGMENT}

@@ -3,12 +3,12 @@ import { MockedProvider } from '@apollo/client/testing';
 import ProductList from '.';
 import { GET_PRODUCTS } from './../../graphql/queries';
 
-export const mockProductList = [
+const mockProductList = [
     {
         request: {
             query: GET_PRODUCTS,
             variables: {
-                options: { take: 12 }
+                options: { take: 1, skip: 0 }
             }
         },
         result: {
@@ -69,7 +69,8 @@ export const mockProductList = [
                             ],
                             __typename: "Product"
                         }
-                    ]
+                    ],
+                    totalItems: 1
                 }
             },
         },
@@ -77,7 +78,7 @@ export const mockProductList = [
 ];
 
 describe('ProductListComponent', () => {
-    test('renders component one product', async () => {
+    test('Should render product list', async () => {
         const { getByRole } = render(
             <MockedProvider mocks={mockProductList} addTypename={false}>
                 <ProductList />

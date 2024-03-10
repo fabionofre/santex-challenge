@@ -14,12 +14,15 @@ export interface ProductType {
 
 export default function ProductList() {
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [page, setPage] = useState(1);
 
   const { loading, data } = useQuery(GET_PRODUCTS, {
     variables: {
-      options: { take: 12 }
+      options: { take: 8, skip: page > 1 ? (page * 8) : 0 }
     }
   });
+
 
   useEffect(() => {
     if (data) {
@@ -34,6 +37,7 @@ export default function ProductList() {
       }));
 
       setProducts(mappedProducts);
+      setTotalProducts(data.products.totalItems);
     }
   }, [data]);
 
