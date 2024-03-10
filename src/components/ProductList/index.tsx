@@ -13,9 +13,9 @@ export interface ProductType {
 }
 
 export default function ProductList() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductType[]>([]);
 
-  const { loading, error, data } = useQuery(GET_PRODUCTS, {
+  const { loading, data } = useQuery(GET_PRODUCTS, {
     variables: {
       options: { take: 12 }
     }
@@ -38,10 +38,9 @@ export default function ProductList() {
   }, [data]);
 
   if (loading) return <h1>Loading...</h1>;
-  if (error) return <h1>{`Error! ${error.message}`}</h1>;
 
   return (
-    <S.ListContainer>
+    <S.ListContainer role="products-list">
       {products.map((product: ProductType) => <Product product={product} key={product.id} />)}
     </S.ListContainer>
   );

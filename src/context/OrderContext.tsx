@@ -5,19 +5,12 @@ interface OrderType {
     subTotal: number;
 }
 
-interface OrderContextType {
+export interface OrderContextType {
     order: OrderType | undefined;
     setOrder: React.Dispatch<React.SetStateAction<OrderType | undefined>>;
 }
 
-export const OrderContext = createContext<OrderContextType>(
-    {
-        order: {
-            subTotal: 0
-        },
-        setOrder: () => null
-    }
-);
+export const OrderContext = createContext<OrderContextType | undefined>(undefined);
 
 export const OrderContextProvider = ({ children }: { children: ReactChild }) => {
     const { value: orderValue, storeValue } = useStateWithStorage<OrderType>('order', { subTotal: 0 });

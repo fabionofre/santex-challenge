@@ -6,13 +6,13 @@ import { ADD_ITEM_TO_ORDER } from '../../graphql/mutations';
 import { formatPrice } from '../../helpers';
 import { OrderContext } from '../../context/OrderContext';
 
-interface ProductProps {
+export interface ProductProps {
     product: ProductType;
 }
 
 export function Product(props: ProductProps) {
     const [addItemToOrder, { loading, error }] = useMutation(ADD_ITEM_TO_ORDER);
-    const { setOrder } = useContext(OrderContext);
+    const orderContext = useContext(OrderContext);
 
     const handleBuyButtonClick = async () => {
         const response = await addItemToOrder({
@@ -23,12 +23,9 @@ export function Product(props: ProductProps) {
         });
 
         if (response.data) {
-            setOrder({ subTotal: response.data.addItemToOrder.total });
+            orderContext?.setOrder({ subTotal: response.data.addItemToOrder.total });
         }
-        console.log('response', response.data.addItemToOrder);
     }
-
-    if (error) return <h1>{`Error! ${error.message}`}</h1>;
 
     return (
         <S.Card>
@@ -42,7 +39,7 @@ export function Product(props: ProductProps) {
             </S.CardBody>
             <S.Price>$ {formatPrice(props.product.price)}</S.Price>
             <S.CardFooter>
-                <S.BuyButton onClick={handleBuyButtonClick}>{loading ? "Buying..." : "Buy"}</S.BuyButton>
+                <S.BuyButton onClick={handleBuyButtonClick} role="buy-button">{loading ? "Buying..." : "Buy"}</S.BuyButton>
             </S.CardFooter>
         </S.Card>
     );

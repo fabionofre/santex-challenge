@@ -6,7 +6,7 @@ import { formatPrice } from '../../helpers';
 export default function Header() {
   const [hasAnimateSubtotal, setHasAnimateSubtotal] = useState(false);
 
-  const { order } = useContext(OrderContext);
+  const orderContext = useContext(OrderContext);
 
   useEffect(() => {
     setHasAnimateSubtotal(true);
@@ -14,7 +14,9 @@ export default function Header() {
       setHasAnimateSubtotal(false);
       clearTimeout(animateTimeout);
     }, 5000);
-  }, [order]);
+
+    return () => clearTimeout(animateTimeout);
+  }, [orderContext?.order]);
 
   return (
     <S.Header>
@@ -24,7 +26,7 @@ export default function Header() {
         height={16}
         alt="logo"
       />
-      <S.SubTotal className={hasAnimateSubtotal ? "animate" : ""}>$ {formatPrice(order?.subTotal || 0)}</S.SubTotal>
+      <S.SubTotal role="header-subtotal" className={hasAnimateSubtotal ? "animate" : ""}>$ {formatPrice(orderContext?.order?.subTotal || 0)}</S.SubTotal>
     </S.Header >
   );
 }
